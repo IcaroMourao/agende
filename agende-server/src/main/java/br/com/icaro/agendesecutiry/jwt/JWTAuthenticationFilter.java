@@ -17,7 +17,6 @@ import br.com.icaro.agende.service.exeception.AuthenticationFailedException;
 
 public class JWTAuthenticationFilter extends GenericFilterBean {
 	
-	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain)
 			throws IOException, ServletException {
 		try {
