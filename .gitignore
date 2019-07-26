@@ -1,0 +1,12 @@
+/target/
+/bin/
+.classpath
+.project
+.settings/
+flexa-angular/package-lock.json
+
+# Android #
+agende-android/.idea/
+agende-android/app/src/main/res/raw/
+
+/.metadata/

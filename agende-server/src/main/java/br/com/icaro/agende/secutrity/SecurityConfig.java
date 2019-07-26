@@ -12,7 +12,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import br.com.icaro.agendesecutiry.jwt.JWTAuthenticationFilter;
 import br.com.icaro.agendesecutiry.jwt.JWTLoginFilter;
 
-
 @Configuration
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
@@ -22,12 +21,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.cors().and().httpBasic()
-			.and().authorizeRequests().antMatchers(HttpMethod.POST, "/api/app/login").permitAll()
-			.and().authorizeRequests().antMatchers(HttpMethod.POST, "/api/app/token/refresh").permitAll()
-			.and().authorizeRequests().antMatchers("/api/app/**").authenticated()
-			.and().addFilterBefore(new JWTLoginFilter("/api/app/login", authenticationManager()), UsernamePasswordAuthenticationFilter.class)
-			.addFilterBefore(new JWTAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
+		http.cors().and().httpBasic().and().authorizeRequests().antMatchers(HttpMethod.POST, "/api/app/login")
+				.permitAll().and().authorizeRequests().antMatchers(HttpMethod.POST, "/api/app/token/refresh")
+				.permitAll().and().authorizeRequests().antMatchers("/api/app/**").authenticated().and()
+				.addFilterBefore(new JWTLoginFilter("/api/app/login", authenticationManager()),
+						UsernamePasswordAuthenticationFilter.class)
+				.addFilterBefore(new JWTAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
 		http.csrf().disable();
 	}
 

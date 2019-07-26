@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">agende-android</string>
+    <string name="app_name">Agende</string>
 
     <!-- Strings related to login -->
     <string name="login_activity_label">Login</string>

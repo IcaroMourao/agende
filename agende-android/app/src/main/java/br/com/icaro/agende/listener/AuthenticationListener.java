@@ -1,4 +1,4 @@
-package br.com.icaro.agende.service.listener;
+package br.com.icaro.agende.listener;
 
 
 import br.com.icaro.agende.model.JWToken;

@@ -13,7 +13,7 @@ import br.com.icaro.agendesecutiry.jwt.JWTUtils;
 @RestController
 @RequestMapping("/api/app/token/refresh")
 public class RefreshTokenController {
-	
+
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<String> refresh(@RequestBody String refreshToken) throws AuthenticationFailedException {
 		return new ResponseEntity<String>(JWTUtils.refresh(refreshToken), HttpStatus.OK);

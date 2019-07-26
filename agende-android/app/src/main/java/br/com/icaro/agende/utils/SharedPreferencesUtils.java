@@ -5,13 +5,12 @@ import android.content.SharedPreferences;
 
 import br.com.icaro.agende.R;
 
-
 public class SharedPreferencesUtils {
 
     private static final String EMPTY = "";
 
-    public static void writeInSharedPreferences(String key, String value, Context context) {
-        SharedPreferences preferences = context.getSharedPreferences(String.valueOf(R.string.preference_private), Context.MODE_PRIVATE);
+    public static void writeInSharedPreferences(String key, String value) {
+        SharedPreferences preferences = AgendeApplicationUtils.getAgendeAppContext().getSharedPreferences(String.valueOf(R.string.preference_private), Context.MODE_PRIVATE);
         SharedPreferences.Editor edit = preferences.edit();
         if (key == null) {
             return;
@@ -25,8 +24,8 @@ public class SharedPreferencesUtils {
         }
     }
 
-    public static String readOfSharedPreferences(String key, Context context){
-        SharedPreferences preferences = context.getSharedPreferences(String.valueOf(R.string.preference_private), Context.MODE_PRIVATE);
+    public static String readOfSharedPreferences(String key){
+        SharedPreferences preferences = AgendeApplicationUtils.getAgendeAppContext().getSharedPreferences(String.valueOf(R.string.preference_private), Context.MODE_PRIVATE);
         String value = preferences.getString(String.valueOf(key), EMPTY);
         return value;
     }

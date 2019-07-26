@@ -17,18 +17,18 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import br.com.icaro.agende.R;
+import br.com.icaro.agende.listener.AuthenticationListener;
 import br.com.icaro.agende.model.JWToken;
 import br.com.icaro.agende.service.LoginService;
-import br.com.icaro.agende.service.listener.AuthenticationListener;
 import br.com.icaro.agende.utils.SessionUtils;
+
 
 public class LoginActivity extends AppCompatActivity {
 
-    private EditText registrationEditText, passwordEditText;
+    private EditText usernameEditText, passwordEditText;
     private Button loginButton;
     private ProgressBar loading;
-    private String username, password;
-    public static final String EMPTY = "";
+    private String username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,34 +39,24 @@ public class LoginActivity extends AppCompatActivity {
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
 
-        setViewElementsById();
-        login();
-    }
 
+        if(SessionUtils.isLogged()) {
+            startActivity(new Intent(getApplicationContext(), HomeActivity.class));
+            finish();
+        } else {
+            setViewElementsById();
 
-    private void login() {
-        loginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                setPassword(passwordEditText.getText().toString());
-                setUsername(registrationEditText.getText().toString());
-                if (!getUsername().equals(EMPTY) && !getPassword().equals(EMPTY)) {
-                    LoginService userService = new LoginService(getApplicationContext());
-                    userService.setAuthenticationListener(getAuthenticationListener());
-                    userService.setCredentials(getUsername(), getPassword());
-                    userService.authenticate(getApplicationContext());
-                } else {
-                    loginButton.setVisibility(View.VISIBLE);
-                    loading.setVisibility(View.INVISIBLE);
-                    Toast.makeText(getApplicationContext(), R.string.unfilled_fields, Toast.LENGTH_SHORT).show();
+            loginButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    login();
                 }
-
-            }
-        });
+            });
+        }
     }
 
     private void setViewElementsById() {
-        registrationEditText = findViewById(R.id.login_username);
+        usernameEditText = findViewById(R.id.login_username);
         passwordEditText = findViewById(R.id.login_password);
         loginButton = findViewById(R.id.login_button);
         loginButton.setVisibility(View.VISIBLE);
@@ -76,41 +66,39 @@ public class LoginActivity extends AppCompatActivity {
         loading.setVisibility(View.INVISIBLE);
     }
 
-    public String getUsername() {
-        return username;
+    private void login() {
+        this.username = usernameEditText.getText().toString();
+        String password = passwordEditText.getText().toString();
+
+        if (!username.trim().isEmpty() && !password.trim().isEmpty()) {
+            LoginService loginService = new LoginService();
+            loginService.setAuthenticationListener(getAuthenticationListener());
+            loginService.authenticate(username, password);
+        } else {
+            loginButton.setVisibility(View.VISIBLE);
+            loading.setVisibility(View.INVISIBLE);
+            Toast.makeText(getApplicationContext(), R.string.unfilled_fields, Toast.LENGTH_SHORT).show();
+        }
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
 
     @NonNull
     private AuthenticationListener getAuthenticationListener() {
         return new AuthenticationListener() {
             @Override
             public void onSuccess(JWToken resultToken) {
-                SessionUtils.writeToken(resultToken, getApplicationContext());
-                SessionUtils.writeUser(getUsername(), getApplicationContext());
+                SessionUtils.writeToken(resultToken);
+                SessionUtils.writeUser(username);
                 LoginTask loginTask = new LoginTask();
                 loginTask.execute();
             }
 
             @Override
-            public void onFailure(String errorMessage) {
-                if(errorMessage != null)
-                    Toast.makeText(getApplicationContext(), errorMessage, Toast.LENGTH_SHORT).show();
+            public void onFailure(String message) {
+                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
             }
         };
     }
-
 
     public class LoginTask extends AsyncTask<Void, Void, Void> {
 

@@ -33,10 +33,10 @@ public class JWToken {
 
     @Override
     public String toString() {
-        return "JWToken{" +
-                "access='" + access + '\'' +
-                ", refresh='" + refresh + '\'' +
-                '}';
+        return "JWToken {" +
+                "\taccess='" + access + "'" +
+                ",\n\trefresh='" + refresh + "'" +
+                "\n}";
     }
 
 }
