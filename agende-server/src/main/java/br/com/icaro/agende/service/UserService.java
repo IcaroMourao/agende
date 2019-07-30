@@ -15,18 +15,19 @@ import br.com.icaro.agende.utils.Utils;
 public class UserService {
 
 	@Autowired
-	UserRepository userRepository; 
-	
+	UserRepository userRepository;
+
 	public User getByUsername(String username) {
 		if (username != null)
 			return userRepository.findByUsername(username);
 		return null;
 	}
-	
+
 	public User add(User user) throws NoSuchAlgorithmException, UnsupportedEncodingException {
 		User withEncryptefPassword = new User();
 		withEncryptefPassword.setUsername(user.getUsername());
-		withEncryptefPassword.setPassword(Utils.cripty(user.getPassword()));;
+		withEncryptefPassword.setPassword(Utils.cripty(user.getPassword()));
+		;
 		return userRepository.save(withEncryptefPassword);
 	}
 

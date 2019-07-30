@@ -16,7 +16,8 @@ import org.springframework.web.filter.GenericFilterBean;
 import br.com.icaro.agende.service.exeception.AuthenticationFailedException;
 
 public class JWTAuthenticationFilter extends GenericFilterBean {
-	
+
+	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain)
 			throws IOException, ServletException {
 		try {
@@ -27,7 +28,8 @@ public class JWTAuthenticationFilter extends GenericFilterBean {
 			response.setCharacterEncoding("UTF-8");
 			HttpServletResponse HSResponse = (HttpServletResponse) response;
 			HSResponse.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-			HSResponse.getWriter().print("{\n\t\"status\": 401,\n\t\"error\": \"Unauthorized\",\n\t\"message\": \"Token inválido\"\n}");
+			HSResponse.getWriter().print(
+					"{\n\t\"status\": 401,\n\t\"error\": \"Unauthorized\",\n\t\"message\": \"Token inválido\"\n}");
 		}
 	}
 }

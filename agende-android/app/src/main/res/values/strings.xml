@@ -1,3 +1,26 @@
 <resources>
-    <string name="app_name">agende-android</string>
+    <string name="app_name">Agende</string>
+
+    <!-- Strings related to login -->
+    <string name="login_activity_label">Login</string>
+    <string name="prompt_username">Nome de Usuário</string>
+    <string name="prompt_password">Senha</string>
+    <string name="action_log_in">Entrar</string>
+    <string name="invalid_username">Nome de Usuário inválido!</string>
+    <string name="invalid_password">Senha deve ter mais de 5 caracteres</string>
+    <string name="login_failed">"Login falhou"</string>
+    <string name="unfilled_fields">Por favor, preencha todos os campos!</string>
+
+    <!-- Strings related to session -->
+    <string name="preference_private">preference</string>
+    <string name="access_token">token</string>
+    <string name="refresh_token">refresh</string>
+    <string name="assistant_type">assistant_type</string>
+
+    <!-- Strings related to Assistant Settings -->
+    <string name="prompt_assistant_name">Nome do Assistente</string>
+    <string name="logged_user">Usuário: %1$s</string>
+
+    <string name="txt_result">Clique no botão e fale!</string>
+
 </resources>

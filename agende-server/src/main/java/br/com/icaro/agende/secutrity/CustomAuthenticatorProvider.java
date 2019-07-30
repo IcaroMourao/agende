@@ -20,7 +20,6 @@ import br.com.icaro.agende.model.User;
 import br.com.icaro.agende.service.LoginService;
 import br.com.icaro.agende.utils.Utils;
 
-
 @Component
 public class CustomAuthenticatorProvider implements AuthenticationProvider {
 
@@ -49,9 +48,10 @@ public class CustomAuthenticatorProvider implements AuthenticationProvider {
 		logger.debug("authenticate: " + user);
 
 		Set<GrantedAuthority> autorizacoes = new HashSet<GrantedAuthority>();
-		/*for (Perfil perfil : usuario.getPerfis()) {
-			autorizacoes.addAll(perfil.getPermissoes());
-		}*/
+		/*
+		 * for (Perfil perfil : usuario.getPerfis()) {
+		 * autorizacoes.addAll(perfil.getPermissoes()); }
+		 */
 		return new UsernamePasswordAuthenticationToken(username, password, autorizacoes);
 	}
 
