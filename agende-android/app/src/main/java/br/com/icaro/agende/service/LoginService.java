@@ -9,11 +9,11 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-
 public class LoginService {
 
     private static final String FAILED_LOGIN_MESSAGE = "Login ou senha inválidos.";
     private static final String SUCCESS_LOGIN_MESSAGE = "Login efetuado com sucesso.";
+    private static final String SERVER_CONNECTION_ERROR_MESSAGE = "Erro ao conectar com o servidor";
 
     private AuthenticationListener authenticationListener;
 
@@ -36,18 +36,14 @@ public class LoginService {
                 if(response.code() == 200){
                     JWToken token = response.body();
                     notifyAuthenticationResult(token, SUCCESS_LOGIN_MESSAGE);
-                } else if (response.code() == 401){
-                    notifyAuthenticationResult(null, FAILED_LOGIN_MESSAGE);
-                } else if (response.code() == 404){
-                    notifyAuthenticationResult(null, APIRESTService.SERVER_NOT_FOUND_MESSAGE);
                 } else {
-                    notifyAuthenticationResult(null, APIRESTService.BAD_REQUEST_MESSAGE);
+                    notifyAuthenticationResult(null, FAILED_LOGIN_MESSAGE);
                 }
             }
 
             @Override
             public void onFailure(Call<JWToken> call, Throwable t) {
-                notifyAuthenticationResult(null,  APIRESTService.SERVER_CONNECTION_ERROR_MESSAGE);
+                notifyAuthenticationResult(null, SERVER_CONNECTION_ERROR_MESSAGE);
             }
         });
     }

@@ -1,8 +1,6 @@
 package br.com.icaro.agende.rest;
 
-
 import java.io.IOException;
-
 
 import br.com.icaro.agende.model.JWToken;
 import br.com.icaro.agende.utils.SessionUtils;

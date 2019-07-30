@@ -1,7 +1,6 @@
 package br.com.icaro.agende.rest;
 
-
-import androidx.annotation.Nullable;
+import android.support.annotation.Nullable;
 
 import java.io.IOException;
 

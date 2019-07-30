@@ -48,7 +48,7 @@ public class SessionUtils {
     }
 
     public static boolean isLogged(){
-        return SessionUtils.readToken() != null && SessionUtils.readToken().getRefresh() != null;
+        return SessionUtils.readToken() != null;
     }
 
     public static String refreshToken() throws IOException {

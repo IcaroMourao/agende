@@ -26,15 +26,5 @@
         layout="@layout/content_home"
         android:background="@color/contrastHighlight" />
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/voiceRecorder"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        android:background="@color/highlight"
-        android:tint="@color/contrastHighlight"
-        app:backgroundTint="@color/highlight"
-        app:srcCompat="@android:drawable/ic_btn_speak_now" />
 
 </android.support.design.widget.CoordinatorLayout>

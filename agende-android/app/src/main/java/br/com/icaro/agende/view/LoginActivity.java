@@ -5,6 +5,8 @@ import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -13,15 +15,11 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import br.com.icaro.agende.R;
 import br.com.icaro.agende.listener.AuthenticationListener;
 import br.com.icaro.agende.model.JWToken;
 import br.com.icaro.agende.service.LoginService;
 import br.com.icaro.agende.utils.SessionUtils;
-
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -45,7 +43,6 @@ public class LoginActivity extends AppCompatActivity {
             finish();
         } else {
             setViewElementsById();
-
             loginButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -80,7 +77,6 @@ public class LoginActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), R.string.unfilled_fields, Toast.LENGTH_SHORT).show();
         }
     }
-
 
     @NonNull
     private AuthenticationListener getAuthenticationListener() {
